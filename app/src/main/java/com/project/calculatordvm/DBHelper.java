@@ -41,13 +41,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void deletecalchistory(String resultsTV,String workingsTV)
+    public void deletecalchistory()
     {
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Calcdetails where resultsTV = ?",new String[]{resultsTV});
+        Cursor cursor = DB.rawQuery("Select * from Calcdetails", null);
         if (cursor.getCount()>0)
         {
-            DB.delete("Calcdetails","resultsTV=?",new String[]{resultsTV});
+            DB.delete("Calcdetails",null,null);
         }
     }
 }
+

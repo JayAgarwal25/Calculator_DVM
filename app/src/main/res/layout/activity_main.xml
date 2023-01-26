@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/darkGrey"
+    android:background="@color/black"
     tools:context=".MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,18 +49,6 @@
         android:orientation="vertical"
         android:layout_weight="4">
 
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:background="@null"
-            android:text="Delete History"
-            android:textColor="@color/white"
-            android:textSize="12dp"
-            android:layout_gravity="right"
-            android:textAlignment="center"
-            android:paddingRight="30dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,23 +101,35 @@
 
             <Button
                 android:layout_width="0dp"
+                android:id="@+id/backspacebtn"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="@dimen/calcButtonTextSize"
                 android:background="@null"
-                android:onClick="bracketsOnClick"
                 android:textColor="@color/orange"
-                android:text="()"/>
+                android:text="@string/Backspace"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:textSize="@dimen/calcButtonTextSize"
                 android:background="@null"
+                android:onClick="leftbracketsOnClick"
                 android:textColor="@color/orange"
-                android:onClick="powerOfOnClick"
-                android:text="^"/>
+                android:text="("/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:textSize="@dimen/calcButtonTextSize"
+                android:background="@null"
+                android:onClick="rightbracketsOnClick"
+                android:textColor="@color/orange"
+                android:text=")"/>
+
+
 
             <Button
                 android:layout_width="0dp"
@@ -289,16 +289,17 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-
             <Button
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="@dimen/calcButtonTextSize"
                 android:background="@null"
-                android:textColor="@color/white"
-                android:text="."
-                android:onClick="decimalOnClick"/>
+                android:textColor="@color/orange"
+                android:onClick="powerOfOnClick"
+                android:text="^"/>
+
+
 
             <Button
                 android:layout_width="0dp"
@@ -310,12 +311,22 @@
                 android:text="0"
                 android:onClick="zeroOnClick"/>
 
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/calcButtonTextSize"
+                android:background="@null"
+                android:textColor="@color/white"
+                android:text="."
+                android:onClick="decimalOnClick"/>
+
 
             <Button
                 android:id="@+id/equalsbtn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:textSize="40sp"
                 android:background="@color/orange"
                 android:textColor="@color/white"

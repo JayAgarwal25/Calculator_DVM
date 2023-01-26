@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     String formula = "";
     String tempFormula = "";
 
-    Button history, array, equals, delete;
+    Button history, array, equals, delete,backspace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         array = findViewById(R.id.matrix);
         equals = findViewById(R.id.equalsbtn);
         delete = findViewById(R.id.delete);
+        backspace = findViewById(R.id.backspacebtn);
 
         DB = new DBHelper(this);
 
@@ -78,13 +81,28 @@ public class MainActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String resultsTVTXT = resultsTV.getText().toString();
-                String workingsTVTXT = workingsTV.getText().toString();
-                DB.deletecalchistory(resultsTVTXT, workingsTVTXT);
+                DB.deletecalchistory();
+                Toast.makeText(MainActivity.this,"History Deleted",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        backspace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!workingsTV.getText().toString().equals("")){
+                    String value = workingsTV.getText().toString();
+                    if (value.length() > 0){
+                        value = value.substring(0,value.length()-1);
+                        workingsTV.setText(value);
+                    }
+
+                }
             }
         });
 
     }
+
+
 
 
     private void initTextViews() {
@@ -134,6 +152,8 @@ public class MainActivity extends AppCompatActivity {
             else
                 break;
         }
+        StringBuilder leftNumberBuilder = new StringBuilder(numberLeft);
+        numberLeft = leftNumberBuilder.reverse().toString();
 
         String original = numberLeft + "^" + numberRight;
         String changed = "Math.pow("+numberLeft+","+numberRight+")";
@@ -154,23 +174,17 @@ public class MainActivity extends AppCompatActivity {
         workingsTV.setText("");
         workings = "";
         resultsTV.setText("");
-        leftBracket = true;
     }
 
-    boolean leftBracket = true;
 
-    public void bracketsOnClick(View view)
+    public void leftbracketsOnClick(View view)
     {
-        if(leftBracket)
-        {
-            setWorkings("(");
-            leftBracket = false;
-        }
-        else
-            {
-                setWorkings(")");
-                leftBracket = true;
-            }
+        setWorkings("(");
+    }
+
+    public void rightbracketsOnClick(View view)
+    {
+        setWorkings(")");
     }
 
     public void powerOfOnClick(View view)

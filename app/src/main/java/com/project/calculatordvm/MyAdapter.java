@@ -13,12 +13,12 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList resultsTV_id,workingsTV_id;
+    private ArrayList results_id,workings_id;
 
-    public MyAdapter(Context context, ArrayList resultsTV_id, ArrayList workingsTV_id) {
+    public MyAdapter(Context context, ArrayList results_id, ArrayList workings_id) {
         this.context = context;
-        this.resultsTV_id = resultsTV_id;
-        this.workingsTV_id = workingsTV_id;
+        this.results_id = results_id;
+        this.workings_id = workings_id;
     }
 
     @NonNull
@@ -30,22 +30,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.resultsTV_id.setText(String.valueOf(resultsTV_id.get(position)));
-        holder.workingsTV_id.setText(String.valueOf(workingsTV_id.get(position)));
+        holder.results_id.setText(String.valueOf(results_id.get(position)));
+        holder.workings_id.setText(String.valueOf(workings_id.get(position)));
 
     }
 
     @Override
     public int getItemCount() {
-        return resultsTV_id.size();
+        return results_id.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView resultsTV_id,workingsTV_id;
+        TextView results_id,workings_id;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            resultsTV_id=itemView.findViewById(R.id.results);
-            workingsTV_id=itemView.findViewById(R.id.workings);
+            results_id=itemView.findViewById(R.id.results);
+            workings_id=itemView.findViewById(R.id.workings);
         }
     }
 }

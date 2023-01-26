@@ -6,7 +6,7 @@
     app:cardElevation="12dp"
     app:cardCornerRadius="16dp"
     android:layout_margin="16dp"
-    android:background="@color/darkGrey">
+    android:background="@color/black">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             android:layout_gravity="center_vertical">
 
             <TextView
-                android:id="@+id/results"
+                android:id="@+id/workings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24dp"
@@ -35,7 +35,7 @@
             android:layout_gravity="center_vertical">
 
             <TextView
-                android:id="@+id/workings"
+                android:id="@+id/results"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24dp"
