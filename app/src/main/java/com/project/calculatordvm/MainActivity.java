@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         history = findViewById(R.id.historybtn);
         array = findViewById(R.id.matrix);
         equals = findViewById(R.id.equalsbtn);
-        delete = findViewById(R.id.delete);
         backspace = findViewById(R.id.backspacebtn);
 
         DB = new DBHelper(this);
@@ -78,13 +77,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DB.deletecalchistory();
-                Toast.makeText(MainActivity.this,"History Deleted",Toast.LENGTH_SHORT).show();
-            }
-        });
 
         backspace.setOnClickListener(new View.OnClickListener() {
             @Override
