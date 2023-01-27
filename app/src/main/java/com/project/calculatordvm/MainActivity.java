@@ -5,13 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
-
-import org.mozilla.javascript.tools.jsc.Main;
 
 import java.util.ArrayList;
 
@@ -29,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     String formula = "";
     String tempFormula = "";
 
-    Button history, array, equals, delete,backspace;
+    Button history, array, equals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         history = findViewById(R.id.historybtn);
         array = findViewById(R.id.matrix);
         equals = findViewById(R.id.equalsbtn);
-        backspace = findViewById(R.id.backspacebtn);
 
         DB = new DBHelper(this);
 
@@ -60,38 +55,24 @@ public class MainActivity extends AppCompatActivity {
         equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Double result = null;
-                ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
-                checkForPowerOf();
-                try {
-                    result = (double) engine.eval(formula);
-                } catch (ScriptException e) {
-                    Toast.makeText(MainActivity.this, "Invalid Input", Toast.LENGTH_SHORT).show();
-                }
-                if (result != null) {
-                    resultsTV.setText(String.valueOf(result.doubleValue()));
-                    String resultsTVTXT = resultsTV.getText().toString();
-                    String workingsTVTXT = workingsTV.getText().toString();
-                    DB.insertcalchistory(resultsTVTXT, workingsTVTXT);
-                }
-            }
-        });
-
-
-        backspace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!workingsTV.getText().toString().equals("")){
-                    String value = workingsTV.getText().toString();
-                    if (value.length() > 0){
-                        value = value.substring(0,value.length()-1);
-                        workingsTV.setText(value);
+                if (!resultsTV.getText().toString().equals("")) {
+                    Double result = null;
+                    ScriptEngine engine = new ScriptEngineManager().getEngineByName("rhino");
+                    checkForPowerOf();
+                    try {
+                        result = (double) engine.eval(formula);
+                    } catch (ScriptException e) {
+                        Toast.makeText(MainActivity.this, "Invalid Input", Toast.LENGTH_SHORT).show();
                     }
-
+                    if (result != null) {
+                        resultsTV.setText(String.valueOf(result.doubleValue()));
+                        String resultsTVTXT = resultsTV.getText().toString();
+                        String workingsTVTXT = workingsTV.getText().toString();
+                        DB.insertcalchistory(resultsTVTXT, workingsTVTXT);
+                    }
                 }
             }
         });
-
     }
 
 
@@ -148,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         numberLeft = leftNumberBuilder.reverse().toString();
 
         String original = numberLeft + "^" + numberRight;
-        String changed = "Math.pow("+numberLeft+","+numberRight+")";
+        String changed = "pow("+numberLeft+","+numberRight+")";
         tempFormula = tempFormula.replace(original,changed);
     }
 
@@ -158,6 +139,17 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         return false;
+    }
+
+    public void backspaceOnClick(View view) {
+        if (!workingsTV.getText().toString().equals("")){
+            String value = workingsTV.getText().toString();
+            if (value.length() > 0){
+                value = value.substring(0,value.length()-1);
+                workingsTV.setText(value);
+            }
+
+        }
     }
 
 

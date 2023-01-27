@@ -107,7 +107,8 @@
                 android:textSize="@dimen/calcButtonTextSize"
                 android:background="@null"
                 android:textColor="@color/orange"
-                android:text="@string/Backspace"/>
+                android:text="@string/Backspace"
+                android:onClick="backspaceOnClick"/>
 
             <Button
                 android:layout_width="0dp"

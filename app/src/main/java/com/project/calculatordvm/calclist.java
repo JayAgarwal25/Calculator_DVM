@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -32,14 +33,16 @@ public class calclist extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         displaydata();
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DB.deletecalchistory();
-                Toast.makeText(calclist.this,"History Deleted",Toast.LENGTH_SHORT).show();
-            }
-        });
+    }
 
+    public void deleteOnClick(View view) {
+        DB.deletecalchistory();
+        Toast.makeText(calclist.this,"History Deleted",Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(calclist.this, calclist.class);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(i);
+        overridePendingTransition(0, 0);
     }
 
     private void displaydata()
